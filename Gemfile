@@ -14,6 +14,9 @@ gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 
+# Authentication
+gem 'devise', '~> 4.7.1'
+
 group :development, :test do
   # debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
