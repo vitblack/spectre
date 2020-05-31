@@ -1,0 +1,46 @@
+<div class="container">
+  <h3>Transactions:</h3>
+
+  <div class="d-flex justify-content-end align-items-center mb-3">
+    <span class="mr-4">Filter:</span>
+    <ul class="nav nav-pills " id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <%= link_to 'All', connection_transactions_path(params[:connection_id], account_id: params[:account_id]), class: "nav-link#{' active' if params[:status].blank?}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Pending', connection_transactions_path(params[:connection_id], account_id: params[:account_id], status: 'pending'), class: "nav-link#{' active' if params[:status] == 'pending'}" %>
+      </li>
+    </ul>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Made on</th>
+      <th scope="col">Category</th>
+      <th scope="col">Status</th>
+      <th scope="col">Description</th>
+      <th scope="col">Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @transactions.present? %>
+      <% @transactions&.each do |account| %>
+        <tr>
+          <td><%= account[:id] %></td>
+          <td><%= account[:made_on] %></td>
+          <td><%= account[:category] %></td>
+          <td><%= account[:status] %></td>
+          <td><%= account[:description] %></td>
+          <td><%= "#{account[:amount]} #{account[:currency_code]}" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <div class="jumbotron">
+        <h4>Transactions not found</h4>
+      </div>
+    <% end %>
+    </tbody>
+  </table>
+</div>

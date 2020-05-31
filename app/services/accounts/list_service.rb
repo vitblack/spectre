@@ -2,15 +2,22 @@
 
 module Accounts
   class ListService < ApplicationService
-    delegate :user, to: :context
+    delegate :user, :connection_id, to: :context
 
     before do
       validate_context
+      @query_params = begin
+        if context.connection_id
+          { connection_id: context.connection_id }
+        else
+          { customer_id: context.user.customer_id }
+        end
+      end
     end
 
     def call
       saltedge = Saltedge.new
-      saltedge.get('accounts', customer_id: context.user.customer_id)
+      saltedge.get('accounts', @query_params)
 
       if saltedge.ok?
         context.accounts = saltedge.body

@@ -21,31 +21,6 @@
 
   <div class="pb-4">
     <h3>Accounts:</h3>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Nature</th>
-        <th scope="col">Balance</th>
-        <th scope="col">Currency</th>
-      </tr>
-      </thead>
-      <tbody>
-        <% if @accounts.present? %>
-          <% @accounts&.each do |account| %>
-            <tr>
-              <td><%= account[:name] %></td>
-              <td><%= account[:nature] %></td>
-              <td><%= account[:balance] %></td>
-              <td><%= account[:currency_code] %></td>
-            </tr>
-          <% end %>
-        <% else %>
-          <div class="jumbotron">
-            <h4>Accounts not found</h4>
-          </div>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render partial: 'accounts/table_list', locals: { accounts: @accounts } %>
   </div>
 </div>
