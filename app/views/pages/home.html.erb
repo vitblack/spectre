@@ -27,6 +27,7 @@
         <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Nature</th>
+        <th scope="col">Transactions</th>
         <th scope="col">Balance</th>
         <th scope="col">Currency</th>
       </tr>
@@ -38,6 +39,7 @@
               <td><%= link_to account[:id], connection_transactions_path(account[:connection_id], account_id: account[:id]) %></td>
               <td><%= account[:name] %></td>
               <td><%= account[:nature] %></td>
+              <td><%= transactions_count(account) %></td>
               <td><%= account[:balance] %></td>
               <td><%= account[:currency_code] %></td>
             </tr>
