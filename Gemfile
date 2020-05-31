@@ -20,6 +20,7 @@ gem 'devise', '~> 4.7.1'
 # App gems
 gem 'interactor', '~> 3.0'
 gem 'faraday'
+gem 'rack-cors'
 
 group :development, :test do
   # debugger
