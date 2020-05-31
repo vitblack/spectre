@@ -17,6 +17,10 @@ gem 'webpacker', '~> 4.0'
 # Authentication
 gem 'devise', '~> 4.7.1'
 
+# App gems
+gem 'interactor', '~> 3.0'
+gem 'faraday'
+
 group :development, :test do
   # debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
