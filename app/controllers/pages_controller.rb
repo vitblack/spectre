@@ -2,10 +2,11 @@
 
 class PagesController < DashboardController
   def home
-    result = Connections::ListService.call(user: current_user)
+    result = HomeService.call(user: current_user)
 
     if result.success?
       @connections = result.connections
+      @accounts = result.accounts
     else
       flash[:alert] = result.error
     end

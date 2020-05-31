@@ -1,18 +1,51 @@
 <div class="container">
-  <h3>Connections:</h3>
 
-  <% if @connections.present? %>
-    <ul>
-      <% @connections&.each do |connection| %>
-        <li><%= connection[:provider_name] %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <div class="jumbotron">
-      <h4>You don't have any connections</h4>
-      <p class="lead">Simple add new by click on the button.</p>
-    </div>
-  <% end %>
+  <div class="pb-4">
+    <h3>Connections:</h3>
 
-  <%= link_to 'Add New', new_connection_path, class: 'btn btn-primary' %>
+    <% if @connections.present? %>
+      <ul>
+        <% @connections&.each do |connection| %>
+          <li><%= link_to connection[:provider_name], connection_accounts_path(connection[:id]) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="jumbotron">
+        <h4>You don't have any connections</h4>
+        <p class="lead">Simple add new by click on the button.</p>
+      </div>
+    <% end %>
+
+    <%= link_to 'Add New', new_connection_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="pb-4">
+    <h3>Accounts:</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Nature</th>
+        <th scope="col">Balance</th>
+        <th scope="col">Currency</th>
+      </tr>
+      </thead>
+      <tbody>
+        <% if @accounts.present? %>
+          <% @accounts&.each do |account| %>
+            <tr>
+              <td><%= account[:name] %></td>
+              <td><%= account[:nature] %></td>
+              <td><%= account[:balance] %></td>
+              <td><%= account[:currency_code] %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <div class="jumbotron">
+            <h4>Accounts not found</h4>
+          </div>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -19,7 +19,6 @@ module Connections
     end
 
     def call
-      p @body
       saltedge = Saltedge.new(customer_secret: context.user.secret)
       saltedge.post('connect_sessions/create', @body)
 
