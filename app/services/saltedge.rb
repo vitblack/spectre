@@ -48,8 +48,10 @@ class Saltedge
   end
 
   def parse_request(body)
-    @body = JSON.parse(body, symbolize_names: true)
-    @error = @body[:error] if @body[:error]
+    response = JSON.parse(body, symbolize_names: true)
+
+    @body   = response[:data]   if response[:data]
+    @error  = response[:error]  if response[:error]
   rescue JSON::ParserError
     @error = INVALID_JSON_FORMAT_ERROR
   end

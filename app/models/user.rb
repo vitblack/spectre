@@ -14,7 +14,7 @@ class User < ApplicationRecord
   private
 
   def attach_customer
-    result = Customer::CreateService.call(user: self)
-    errors[:base] << result.error if result.failure?
+    Customer::CreateService.call(user: self)
+    # errors[:base] << result.error if result.failure?
   end
 end
