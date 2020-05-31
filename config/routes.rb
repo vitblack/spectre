@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   resources :connections, only: %i[index new] do
     get :accounts, to: 'accounts#index'
+    get :transactions, to: 'transactions#index'
   end
 end

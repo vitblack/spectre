@@ -24,6 +24,7 @@
     <table class="table table-hover">
       <thead>
       <tr>
+        <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Nature</th>
         <th scope="col">Balance</th>
@@ -34,6 +35,7 @@
         <% if @accounts.present? %>
           <% @accounts&.each do |account| %>
             <tr>
+              <td><%= link_to account[:id], connection_transactions_path(account[:connection_id], account_id: account[:id]) %></td>
               <td><%= account[:name] %></td>
               <td><%= account[:nature] %></td>
               <td><%= account[:balance] %></td>
