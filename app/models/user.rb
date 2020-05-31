@@ -8,4 +8,13 @@ class User < ApplicationRecord
 
   validates :identifier, uniqueness: true
   validates :customer_id, uniqueness: true, allow_nil: true
+
+  after_create :attach_customer
+
+  private
+
+  def attach_customer
+    result = Customer::CreateService.call(user: self)
+    errors[:base] << result.error if result.failure?
+  end
 end
