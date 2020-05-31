@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Nature</th>
+    <th scope="col">Transactions</th>
+    <th scope="col">Balance</th>
+    <th scope="col">Currency</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if accounts.present? %>
+    <% accounts&.each do |account| %>
+      <tr>
+        <td><%= link_to account[:id], connection_transactions_path(account[:connection_id], account_id: account[:id]) %></td>
+        <td><%= account[:name] %></td>
+        <td><%= account[:nature] %></td>
+        <td><%= transactions_count(account) %></td>
+        <td><%= account[:balance] %></td>
+        <td><%= account[:currency_code] %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <div class="jumbotron">
+      <h4>Accounts not found</h4>
+    </div>
+  <% end %>
+  </tbody>
+</table>

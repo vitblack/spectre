@@ -2,15 +2,19 @@
 
 module Transactions
   class ListService < ApplicationService
-    delegate :connection_id, :account_id, to: :context
+    KNOWN_STATUS = %w[pending].freeze
+    delegate :connection_id, :account_id, :status, to: :context
 
     before do
       validate_context
+      @status = context.status if KNOWN_STATUS.include? context.status
+      @url = 'transactions'
+      @url += "/#{@status}" if @status
     end
 
     def call
       saltedge = Saltedge.new
-      saltedge.get('transactions', connection_id: context.connection_id, account_id: context.account_id)
+      saltedge.get(@url, connection_id: context.connection_id, account_id: context.account_id)
 
       if saltedge.ok?
         context.transactions = saltedge.body
