@@ -14,4 +14,25 @@ module PagesHelper
 
     link_to(total, connection_transactions_path(account[:connection_id], account_id: account[:id]))
   end
+
+  def status_label(status)
+    class_name  = case status
+                  when 'active'
+                    'success'
+                  when 'inactive'
+                    'secondary'
+                  when 'fail'
+                    'danger'
+                  else
+                    'info'
+                  end
+
+    "<span class=\"badge badge-#{class_name}\">#{status}</span>".html_safe
+  end
+
+  def connection_title(connection)
+    return connection[:provider_name] unless connection[:status] == 'active'
+
+    link_to connection[:provider_name], connection_accounts_path(connection[:id])
+  end
 end

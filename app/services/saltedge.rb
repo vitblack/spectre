@@ -30,8 +30,13 @@ class Saltedge
     read_body
   end
 
-  def get(url, args)
+  def get(url, args = {})
     @response = connection.get(url, args)
+    read_body
+  end
+
+  def delete(url)
+    @response = connection.delete(url)
     read_body
   end
 

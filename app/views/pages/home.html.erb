@@ -1,26 +1,38 @@
 <div class="container">
-
-  <div class="pb-4">
-    <h3>Connections:</h3>
-
-    <% if @connections.present? %>
-      <ul>
-        <% @connections&.each do |connection| %>
-          <li><%= link_to connection[:provider_name], connection_accounts_path(connection[:id]) %></li>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="jumbotron">
-        <h4>You don't have any connections</h4>
-        <p class="lead">Simple add new by click on the button.</p>
+  <div class="d-flex justify-content-end">
+    <div class="card my-4" style="max-width: 100%; width: 360px;">
+      <div class="card-header">
+        Connections
       </div>
-    <% end %>
+      <div class="card-body">
+        <% if @connections.present? %>
+          <% @connections&.each do |connection| %>
+            <div class="mb-2 d-flex justify-content-between">
+              <%= connection_title(connection) %>
+              <div>
+                <%= status_label(connection[:status]) %>
+              </div>
+              <%= link_to connection_path(connection[:id]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do %>
+                <i class="far fa-trash-alt"></i>
+              <% end %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="jumbotron">
+            <h4>You don't have any connections</h4>
+            <p class="lead">Simple add new by click on the button.</p>
+          </div>
+        <% end %>
 
-    <%= link_to 'Add New', new_connection_path, class: 'btn btn-primary' %>
+        <%= link_to 'Add New', new_connection_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 
-  <div class="pb-4">
-    <h3>Accounts:</h3>
-    <%= render partial: 'accounts/table_list', locals: { accounts: @accounts } %>
+  <h4>Accounts:</h4>
+  <div class="card my-4">
+    <div class="card-body">
+      <%= render partial: 'accounts/table_list', locals: { accounts: @accounts } %>
+    </div>
   </div>
 </div>
