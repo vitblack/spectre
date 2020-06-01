@@ -11,7 +11,7 @@ module Connections
     end
 
     def call
-      saltedge = Saltedge.new(customer_secret: connection_secret)
+      saltedge = Saltedge.new(connection_secret: connection_secret)
       saltedge.delete("connections/#{connection_id}")
 
       if saltedge.ok?

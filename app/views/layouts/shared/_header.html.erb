@@ -9,9 +9,21 @@
       <ul class="navbar-nav mr-auto">
       </ul>
       <span class="navbar-text">
-        <strong><%= current_user.email %></strong>.
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email %>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to edit_user_registration_path, :class => 'dropdown-item' do %>
+              <i class="far fa-edit"></i> Edit profile
+            <% end %>
+            <div class="dropdown-divider"></div>
+            <%= link_to destroy_user_session_path, method: :delete, :class => 'dropdown-item'   do %>
+              <i class="fas fa-sign-out-alt"></i> Logout
+            <% end %>
+          </div>
+        </div>
       </span>
     </div>
   </nav>

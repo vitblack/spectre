@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :connections, only: %i[index new destroy] do
     get :accounts, to: 'accounts#index'
     get :transactions, to: 'transactions#index'
+    get :reconnect
+    get :refresh
   end
 
   namespace :api, defaults: { format: 'json' } do
