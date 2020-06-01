@@ -2,7 +2,12 @@
   <div class="d-flex justify-content-end">
     <div class="card my-4" style="max-width: 100%; width: 360px;">
       <div class="card-header">
-        Connections
+        <div class="d-flex justify-content-between">
+          Connections
+          <%= link_to new_connection_path, class: 'btn btn-primary btn-sm' do %>
+            <i class="fas fa-plus"></i> Add New
+          <% end %>
+        </div>
       </div>
       <div class="card-body">
         <% if @connections.present? %>
@@ -12,9 +17,13 @@
               <div>
                 <%= status_label(connection[:status]) %>
               </div>
-              <%= link_to connection_path(connection[:id]), method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do %>
-                <i class="far fa-trash-alt"></i>
-              <% end %>
+              <div>
+                <%= refresh_link(connection) %>
+                <%= reconnect_link(connection) %>
+                <%= link_to connection_path(connection[:id]), method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Destroy connection', class: 'text-danger' do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </div>
             </div>
           <% end %>
         <% else %>
@@ -23,8 +32,6 @@
             <p class="lead">Simple add new by click on the button.</p>
           </div>
         <% end %>
-
-        <%= link_to 'Add New', new_connection_path, class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
