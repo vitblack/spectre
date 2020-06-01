@@ -111,4 +111,14 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_mailer.default_url_options = { host: 'spectre-t.herokuapp.com' }
+
+  Rails.application.config.hosts << 'spectre-t.herokuapp.com'
+
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'saltedge.com', 'https://www.saltedge.com',
+              %r{\Ahttps://([a-z0-9]+[.])saltedge.com?\z}
+      resource '/api/*', headers: :any, methods: %i[post]
+    end
+  end
 end

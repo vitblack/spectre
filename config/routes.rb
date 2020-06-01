@@ -8,4 +8,11 @@ Rails.application.routes.draw do
     get :accounts, to: 'accounts#index'
     get :transactions, to: 'transactions#index'
   end
+
+  namespace :api, defaults: { format: 'json' } do
+    resources :callbacks, only: [] do
+      post :fail, on: :collection
+      post :success, on: :collection
+    end
+  end
 end
